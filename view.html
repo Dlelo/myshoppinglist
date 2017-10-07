@@ -22,9 +22,9 @@
 <div id="wrapper">
 <table align='center' cellspacing=2 cellpadding=5 id="data_table" border=1>
 <tr>
-<th>Item</th>
-<th>Quantity</th>
-<th>Price(Ksh.)</th>
+<th id="name_column1">Item</th>
+<th id="country_column1">Quantity</th>
+<th id="age_column1">Price(Ksh.)</th>
 </tr>
 
 <tr id="row1">
@@ -64,17 +64,15 @@
 <td><input type="text" id="new_name"></td>
 <td><input type="text" id="new_country"></td>
 <td><input type="text" id="new_age"></td>
-<td><input type="button" class="add" onclick="add_row();" value="Add Row"></td>
+<td><input type="button" class="add" onclick="add_row();" value="Add Item"></td>
 </tr>
 
 </table>
-
-<p style="text-align:center"> Your total cost is: </p>
 </div>
 
 
 <div>
-	<input type="button" class="add" onclick="add_row();" value="Add shopping List"></td>
+	<input type="button" class="add" onclick="create_table();" value="Add shopping List"></td>
 	
 </div>
 
