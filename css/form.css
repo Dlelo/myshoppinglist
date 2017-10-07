@@ -1,0 +1,50 @@
+.forms{
+
+  position: absolute;
+  right:30%;
+  left:30%;
+  top: 10%;
+  background: #ffffff;
+  color: #999999;
+  padding: 11px 0;
+  width: 250px;
+  height: 300px;
+  margin-top: -15px;
+  border:medium solid red;;
+  border-radius: 10%;
+  transition: all ease-in-out 500ms;
+}
+
+
+.form-group {
+  background: #ffffff;
+  color: #999999;
+  border-radius: 10px;
+  padding: 20px 20px;
+}
+
+.list-area {
+    width: 100%;
+    border: 1px solid gray;
+}
+
+header{
+    padding: 1em;
+    color: black;
+    background-color: purple;
+    clear: left;
+    text-align: center;
+  }
+
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  .wrapper{
+    background-color:purple;
+  }
