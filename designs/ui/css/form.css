@@ -65,6 +65,16 @@ header{
     width: 35%;
     position:center;
   }
+.btn-view {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 10%;
+    position:center;
+  }
 body {
   font: 13px/20px &quot;Lucida Grande&quot;, Tahoma, Verdana, sans-serif;
   background-image: url("images/shop.jpg");
