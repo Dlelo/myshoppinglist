@@ -5,7 +5,7 @@ class Accounts_for_users(object):
     def __init__(self):
 
 
-        self.list_of_accounts = [{'uname':'default',
+        self.all_users_accounts = [{'uname':'default',
                                   'email':'default@user.com',
                                   'pswd':'default'}]
     
@@ -14,9 +14,9 @@ class Accounts_for_users(object):
         """Method used to creating new accounts."""
         dict_for_each_account = {}
 
-        for account in self.list_of_accounts:
-            if email == account['email']:
-                return "Your Account is Active. Proceed to login"
+        for an_account in self.all_users_accounts:
+            if email == an_account['email']:
+                return "Your Account is Already Registered. Proceed to login"
         else:
             if len(pswd) < 6:
                 return "The Password is too short"
@@ -24,15 +24,15 @@ class Accounts_for_users(object):
                 dict_for_each_account['uname'] = uname
                 dict_for_each_account['email'] = email
                 dict_for_each_account['pswd'] = pswd
-                self.list_of_accounts.append(dict_for_each_account)
+                self.all_users_accounts.append(dict_for_each_account)
             else:
                 return "Your passwords do not match"
         return "Kudos! Your have successfuly registered  your account please proceed to login"
 
     def login(self, email, pswd):
         """Method used to manage Login """
-        for account in self.list_of_accounts:
-            if email == account['email'] and uname == account['uname']:
+        for an_account in self.all_users_accounts:
+            if email == an_account['email'] and uname == an_account['uname']:
                 return "Success!"
             else:
                 return "Invalid email, password combination"
@@ -40,8 +40,8 @@ class Accounts_for_users(object):
 
     def get_uname_by_email(self, email):
         """Returns the username when provided with email"""
-        for account in self.list_of_accounts:
-            if email == account['email']:
-                return account['uname']
+        for an_account in self.all_users_accounts:
+            if email == an_account['email']:
+                return an_account['uname']
 
     
