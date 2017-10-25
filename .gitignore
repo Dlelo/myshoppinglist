@@ -2,15 +2,15 @@
 *.pyc
 
 # my virtual environment Files
-bin/
-include/
-lib/
+/bin
+/include
+/lib
 lib64
 pip-selfcheck.json
 pyvenv.cfg
 
 
 #nosetest files
-share/
-man/
+/share
+/man
 
