@@ -1,2 +1,16 @@
 # ignore all .pyc files
 *.pyc
+
+# my virtual environment Files
+bin/
+include/
+lib/
+lib64
+pip-selfcheck.json
+pyvenv.cfg
+
+
+#nosetest files
+share/
+man/
+
