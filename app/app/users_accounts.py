@@ -32,7 +32,7 @@ class Accounts_for_users(object):
     def login(self, email, pswd):
         """Method used to manage Login """
         for an_account in self.all_users_accounts:
-            if email == an_account['email'] and uname == an_account['uname']:
+            if email == an_account['email'] and psw == an_account['pswd']:
                 return "Success!"
             else:
                 return "Invalid email, password combination"
