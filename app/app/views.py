@@ -12,45 +12,29 @@ usr_account=users_accounts.Accounts_for_users()
 def index():
     return render_template("index.html")
 
-def login_required(f):
-    """Restricts access to pages that require user to login before accessing"""
-    @wraps(f)
-    def wrap(*args, **kwargs):
-        """wraps around the f function"""
-        if 'username' in session:
-            return f(*args, **kwargs)
-        else:
-            message = "Please login"
-            return render_template("login.html", response=message)
-    return wrap
-
-
-
 #login page functions
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """Manages requests sent by Login Page"""
     if request.method == 'POST':
-        email = request.form['email']
-        pswd = request.form['password']
-        message = usr_account.login(email, pswd)
-        if message == "Success!":
-            session['email'] = email
-            session['username'] = usr_account.get_uname_by_email(email)
-            table_response = list_table_creator.ItemTable(
-                shopn_list.users_list(session['username']))
-            return redirect('/view')
-                              
-        else:
-            return redirect('/signup')
+        session['email'] = request.form['email']
+        session['username'] = usr_account.get_uname_by_email(request.form['email'])
+        #email = request.form['email']
+        #pswd = request.form['password']
+        #message = usr_account.login(email, pswd)
+        #if message == "Success!":
+            
+            
+        return redirect(url_for('view'))
 
     return render_template("login.html")
 
 @app.route("/logout")
 def logout():
-    session['logged_in'] = False
-    return login()
+    session.pop('username', None)
+    # remove the username from the session if it is there
+    return redirect(url_for('index'))
 
 
 @app.route('/view')
@@ -70,18 +54,21 @@ def confirm():
 def signup():
    
     if request.method == 'POST':
-        uname = request.form['username']
-        email = request.form['email']
-        pswd = request.form['password']
-        pswd_confirmed = request.form['password_confirm']
+        uname = request.form.get('username')
+        email = request.form.get('email')
+        pswd = request.form.get('password')
+        pswd_confirmed = request.form.get('password_confirm')
 
         message = usr_account.registration(uname, email, pswd, pswd_confirmed)
-        if message == "Kudos! Your have successfuly registered  your account please proceed to login"\
-        or message == "Your Account is Active. Proceed to login":
-            flash('Kudos! Your have successfuly registered  your account please proceed to login')
-            return redirect('/login')
+        if message == "Kudos! Your have successfuly registered  your account please proceed to login":
+            return render_template("login.html", response=message)
+        elif message == "Your Account is Already Registered. Proceed to login":
+            return render_template("login.html", response=message)
+        elif message == "Your Account is Already Registered. Proceed to login":
+            return render_template("signup.html", response=message)
         else:
-        	return redirect('/signup')
+            message="Your passwords do not match"
+            return render_template("signup.html", response=message)
 
     return render_template("signup.html")
 
