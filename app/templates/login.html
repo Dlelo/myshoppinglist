@@ -1,0 +1,51 @@
+
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+{% if session['logged_in'] %}
+<p>You're logged in already!</p>
+{% else %}
+
+<div>
+
+<h2>Login to view your shopping list<h2>
+
+</div>
+
+<form class="forms" action="/login" method="POST">
+
+
+<div>
+
+ <label for="email">Email</label><br>
+  
+ <input type="text" name="email" placeholder="Email address" required ><br>
+
+ </div>
+
+ <div >
+
+ <label for="password">Password</label><br>
+  
+ <input type="password" name="password" placeholder="password" required><br>
+
+ </div>
+
+ <div>
+  
+ <button type="submit" class="btn" id="button" value="Log In">Log In</button>
+
+  </div>
+
+<div class="text-register">
+
+<p>Forgot your password? <a href="/recover">Click Here</a></p>
+
+
+<p>Are you New? <a href="/signup">Register Here</a></p>
+	
+
+</div>
+
+{% endif %}	
+{% endblock %}
