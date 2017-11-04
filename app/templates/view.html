@@ -3,15 +3,31 @@
 {% block body %}
 
 
-<div class="list-area">
+<div>
 
-<header>
+<p>
    <h2>My Shopping Lists</h2>   
-</header>
+</p>
+
+</div>
 
 <div>
-	<input type="button" class="add btn-view" onclick="create_table();" value="Add shopping List"></td>	
+
+<form action="/view" method="POST">
+<input type="text" name="list_name">
+<input type="submit" value="Add" class="btn">
+</form>
+
+<!--<form action="" method="POST">
+   <input type="text" name="text" placeholder="Enter Shopping ListName">
+   <button type="submit" class="btn" id="button" value="Add">Add</button>-->
+{% if text %}
+  You have Added the shopping List: {{ text }}
+{% endif %}
+
 </div>
+
+ 
 
 {% endblock %}
   
