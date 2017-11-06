@@ -5,11 +5,14 @@ class Accounts_for_users(object):
     """ the class for creating a user account and login"""
     def __init__(self):
 
+        #self.uname=''
+
+        self.dict_for_each_account = {}
+
         self.all_users_accounts = [{'uname': 'default', 'email': 'default@user.com', 'pswd': 'default'}]
 
     def registration(self, uname, email, pswd, pswd_confirm):
         """Method used to creating new accounts."""
-        dict_for_each_account = {}
 
         for dict_for_each_account in self.all_users_accounts:
             if email == dict_for_each_account['email']:
@@ -47,18 +50,27 @@ class Accounts_for_users(object):
 
 class shopping_list(Accounts_for_users):
 
-    def __init__(self):
+    
+
+    def __init__(self,uname,shopping_listname):
+
+        Accounts_for_users.__init__(self,uname)
+
         self.list_for_user_shoppinglists = []
 
-        """Method used to create shopping list """
-    def add_shopping_list(self, uname, shopping_listname):
-        # user should add shopping list
+        self.shopping_listname=shopping_listname
 
-        for dict_for_each_account in self.all_users_accounts:
+
+        """Method used to create shopping list """
+    def add_shopping_list(shopping_listname):
+        # user logged in with username should add shopping list
+
             if uname == dict_for_each_account['uname']:         
 
                 if shopping_listname not in self.list_for_user_shoppinglists:
                     self.list_for_user_shoppinglists.append(shopping_listname)
+                    for item in list_for_user_shoppinglists:
+                        print(item)
                 else:
                     return "Shopping list name already exists, create a new shopping list"
                 
