@@ -4,11 +4,18 @@
 
 from flask import Flask, flash, redirect, render_template, request, session, abort, url_for, escape, make_response
 
-from app import app, users_accounts
+from app import app, users_accounts,shopping_list
+from flask_wtf import Form
+from wtforms import StringField, SubmitField
+from wtforms.validators import Required
+
 import os
 app.secret_key = os.urandom(20)
 
 usr_account = users_accounts.Accounts_for_users()
+my_shopping_list=shopping_list.your_shopping_list()
+
+
 
 # static folder
 
@@ -59,6 +66,7 @@ def logout():
     return redirect(url_for('index'))
 
 
+
 @app.route("/view")
 def hello():
     return render_template('view.html')
@@ -66,10 +74,20 @@ def hello():
 
 #adding list in view template
 @app.route("/view", methods=['POST'])
-def view(): 
-    return render_template('view.html', text=request.form['list_name'])
+def view():
+    if request.method == 'POST':
+        
+        all_shopping_list=[]
+        shopping_list=request.form.get('list_name')
+        message=my_shopping_list.add_shopping_list(shopping_list)
+        if message=="Shopping list successfully added!":
+            print (shopping_list)
 
-# New user register
+
+
+
+
+    return render_template('view.html', text=shopping_list, response=message)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -113,6 +131,8 @@ def dropsession():
 @app.route('/shoppinglistitems')
 def shoppinglistitems():
     return render_template('shoppinglistitems.html')
+
+
    
 
    
