@@ -72,22 +72,22 @@ def hello():
     return render_template('view.html')
 
 
+text=[]
 #adding list in view template
 @app.route("/view", methods=['POST'])
 def view():
     if request.method == 'POST':
-        
-        all_shopping_list=[]
-        shopping_list=request.form.get('list_name')
-        message=my_shopping_list.add_shopping_list(shopping_list)
-        if message=="Shopping list successfully added!":
-            print (shopping_list)
+        if 'uname' in session:
+            shopping_list=request.form.get('list_name')
+            message=my_shopping_list.add_shopping_list(shopping_list)
+            if message=="Shopping list successfully added!":
+                text.append(shopping_list)
+                print (text)
+        else:
+            return "Login to proceed"
 
 
-
-
-
-    return render_template('view.html', text=shopping_list, response=message)
+    return render_template('view.html', text=text, response=message)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -131,6 +131,8 @@ def dropsession():
 @app.route('/shoppinglistitems')
 def shoppinglistitems():
     return render_template('shoppinglistitems.html')
+
+
 
 
    
