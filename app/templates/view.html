@@ -7,7 +7,7 @@
 <div>
 
 <p>
-   <h2>Add Shopping List here</h2>   
+   <h2><small>Welcome {{session}}</small>Add Shopping List here</h2>   
 </p>
 
 </div>
@@ -19,21 +19,22 @@
 <input type="submit" value="Add" class="btn">
 </form>
 
+<div>
+
 <!--<form action="" method="POST">
    <input type="text" name="text" placeholder="Enter Shopping ListName">
    <button type="submit" class="btn" id="button" value="Add">Add</button>-->
-{% if text %}
-  You have added the shopping list: {{ text }} 
+{% if text|length==0 %}
+  
 
-  <div>
-  	<p>
-   <h2>Your Shopping Lists</h2>   
-   </p>
+  <p>No shopping list: Please add a shopping list</p>
+
+  {%else%}
+  	<p><h2>Your Shopping Lists</h2></p>
    <ol>
             {% for x in text %}
             <li> <button class="btn">{{ x }}</button>
                      <a href="/shoppinglistitems" class="btn">Add items</a>
-
                     <a href="/update_shoppinglist/{{ loop.index0 }}" class="btn btn-default ">Edit</a>
                     <a href="/delete_shoppinglist" class="btn btn-danger ">Delete</a>
             </li>
