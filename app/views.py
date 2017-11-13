@@ -73,21 +73,62 @@ def hello():
 
 
 text=[]
-#adding list in view template
+#adding shoppinglist in view template
 @app.route("/view", methods=['POST'])
 def view():
     if request.method == 'POST':
         if 'uname' in session:
             shopping_list=request.form.get('list_name')
             message=my_shopping_list.add_shopping_list(shopping_list)
+
+            #initiate list name session to enable list items to be stored in list
+
+            session['list_name'] = shopping_list
+
             if message=="Shopping list successfully added!":
                 text.append(shopping_list)
                 print (text)
+
         else:
             return "Login to proceed"
 
 
     return render_template('view.html', text=text, response=message)
+
+#add list_item to shopping list
+listitems=[]
+
+@app.route('/shoppinglistitems', methods=['POST','GET'])
+def shoppinglistitems():
+    if request.method == 'POST':
+        if 'uname' in session and 'list_name' in session:
+            dict_of_list_items={}
+            
+
+            itemname=request.form.get('item')
+            itemquantity=request.form.get('quantity')
+            itemprice=request.form.get('price')
+
+            #adding items to dictionary
+            dict_of_list_items['item_name'] = itemname
+            dict_of_list_items['quantity'] = itemquantity
+            dict_of_list_items['price'] = itemprice
+
+            listitems.append(dict_of_list_items)
+            print(listitems)
+
+
+            message=my_shopping_list.add_shopping_list_item(itemname,itemquantity,itemprice)
+            if message=="shopping list item successfully added":
+
+                print (listitems)
+        else:
+            return "Login to proceed"
+
+
+    return render_template('shoppinglistitems.html', items=listitems)
+
+
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -128,9 +169,7 @@ def dropsession():
     session.pop('uname', None)
     return 'Dropped!'
 
-@app.route('/shoppinglistitems')
-def shoppinglistitems():
-    return render_template('shoppinglistitems.html')
+
 
 
 
