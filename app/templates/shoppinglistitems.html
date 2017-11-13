@@ -5,12 +5,37 @@
 <div>
 
 <form action = "/shoppinglistitems" method = "POST">
-    Item <input type = "text" name = "Item" /> 
-    Quantity <input type = "text" name = "Quantity" />
-    Price <input type = "text" name = "Price" />
-    <input type = "submit" value = "submit" class="btn" />
+    Item <input type = "text" name = "item" /> 
+    Quantity <input type = "text" name = "quantity" />
+    Price <input type = "text" name = "price" />
+    <input type = "submit" value = "Add" class="btn" />
 </form>
 </div>
 
 
+{% if items|length==0 %}
+  
+
+  <p>No item in the shopping list: Please add a shopping list</p>
+
+  {%else%}
+  	<p><h2>Your Shopping Lists items</h2></p>
+   <ol>
+            {% for x in items %}
+            <li> <button class="btn">{{ x }}</button>
+                    <a href="/update_shoppinglist/{{ loop.index0 }}" class="btn btn-default ">Edit</a>
+                    <a href="/delete_shoppinglist" class="btn btn-danger ">Delete</a>
+            </li>
+            {% endfor %}
+        </ol> 
+
+        <div>
+        	<a href="/view">Go back to shopping lists</a>
+        </div>
+
+  </div>
+
+
+{% endif %}
 {% endblock %}
+
