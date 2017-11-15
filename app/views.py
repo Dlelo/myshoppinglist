@@ -66,34 +66,74 @@ def logout():
     return redirect(url_for('index'))
 
 
-
-@app.route("/view")
-def hello():
-    return render_template('view.html')
-
-
 text=[]
 #adding shoppinglist in view template
-@app.route("/view", methods=['POST'])
+@app.route("/view", methods=['POST','GET'])
 def view():
     if request.method == 'POST':
         if 'uname' in session:
             shopping_list=request.form.get('list_name')
-            message=my_shopping_list.add_shopping_list(shopping_list)
-
-            #initiate list name session to enable list items to be stored in list
-
-            session['list_name'] = shopping_list
-
-            if message=="Shopping list successfully added!":
-                text.append(shopping_list)
-                print (text)
-
+            if shopping_list not in text:
+                message=my_shopping_list.add_shopping_list(shopping_list)
+                #initiate list name session to enable list items to be stored in list
+                if message=="Shopping list successfully added!":
+                    text.append(shopping_list)
+                    session['list_name'] = shopping_list
+                    print (text)
+            else:
+                flash("There is a shopping list with that name. Please choose another shopping list Name") 
+                return redirect(url_for('view'))
         else:
-            return "Login to proceed"
+            flash("Login to proceed")
+            return redirect(url_for('login'))
 
 
-    return render_template('view.html', text=text, response=message)
+
+    return render_template('view.html', text=text)
+
+#shopping lists
+@app.route('/shoppinglists',methods=['POST','GET'])
+def shoppinglists():
+    if request.method == 'POST':
+        if 'uname' in session:
+            shopping_list=request.form.get('list_name')
+            if shopping_list not in text:
+                message=my_shopping_list.add_shopping_list(shopping_list)
+                #initiate list name session to enable list items to be stored in list
+                if message=="Shopping list successfully added!":
+                    text.append(shopping_list)
+                    session['list_name'] = shopping_list
+                    print (text)
+            else:
+                flash("There is a shopping list with that name. Please choose another shopping list Name") 
+                return redirect(url_for('view'))
+        else:
+            flash("Login to proceed")
+            return redirect(url_for('login'))
+
+
+
+    return render_template('view.html', text=text)
+
+#single shoppinglist
+@app.route('/update_shoppinglist/<listname>/',methods=['POST','GET'])
+def update_shoppinglist(listname):
+    if request.method == 'POST':
+        if 'uname' in session:
+            session['list_name']=listname
+            new_listname=request.form.get('new_list_name')
+            if shopping_list not in text:
+                session['new_list_name']=new_listname
+            else:
+                flash("There is a shopping list with that name. Please choose another shopping list Name") 
+                return redirect(url_for('update_shoppinglist', listname=new_listname))
+
+
+
+    return render_template('update_shoppinglist.html', listname=listname)
+
+        
+        
 
 #add list_item to shopping list
 listitems=[]
@@ -158,8 +198,8 @@ def signup():
 
 @app.route('/getsession')
 def getsession():
-    if 'uname' in session:
-        return session['uname']
+    if 'uname' in session or 'list_name' in session:
+        return session['uname'] , session['list_name']
 
     return 'Not logged in!'
 
