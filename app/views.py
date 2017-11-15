@@ -96,6 +96,7 @@ def view():
 def shoppinglists():
     if request.method == 'POST':
         if 'uname' in session:
+            u_name=session['uname']
             shopping_list=request.form.get('list_name')
             if shopping_list not in text:
                 message=my_shopping_list.add_shopping_list(shopping_list)
@@ -113,24 +114,63 @@ def shoppinglists():
 
 
 
-    return render_template('view.html', text=text)
+    return render_template('shoppinglists.html', text=text)
 
-#single shoppinglist
-@app.route('/update_shoppinglist/<listname>/',methods=['POST','GET'])
-def update_shoppinglist(listname):
+#Edit shoppinglist
+"""@app.route("/edit_shoppinglist/<int:list_id>", methods=['POST','GET'])
+def edit_article(list_id):
+    #get shoppinglist by id
+    old_shopping_list=session['list_name'][list_id]
     if request.method == 'POST':
         if 'uname' in session:
-            session['list_name']=listname
-            new_listname=request.form.get('new_list_name')
-            if shopping_list not in text:
-                session['new_list_name']=new_listname
+            #get new shoppinglist name from user input
+            new_shopping_list=request.form.get('new_list_name')
+            if new_shopping_list not in text:
+                message=my_shopping_list.add_shopping_list(shopping_list)
+                #initiate list name session to enable list items to be stored in list
+                if message=="Shopping list successfully added!":
+                    text.append(new_shopping_list)
+                    list_name[list_id]=new_shopping_list
+                    session['list_name'] = listname
+                    print (text)
+                    print(session['list_name'])
             else:
                 flash("There is a shopping list with that name. Please choose another shopping list Name") 
-                return redirect(url_for('update_shoppinglist', listname=new_listname))
+                return redirect(url_for('view'))
+        else:
+            flash("Login to proceed")
+            return redirect(url_for('login'))
 
 
 
-    return render_template('update_shoppinglist.html', listname=listname)
+    return render_template('update_shoppinglist.html', old_shopping_list=old_shopping_list, list_id=list_id)"""
+
+
+    #single shoppinglist
+@app.route('/edit_shoppinglist/<string:id>/',methods=['POST','GET'])
+def edit_shoppinglist(id):
+
+    #get shoppinglist by id
+    old_shoppinglist_name=session['list_name'][id]
+    if request.method == 'POST':
+        if 'uname' in session and 'list_name' in session:
+            list_name=session['list_name']
+    return render_template('edit_shoppinglist', id=id, old_shoppinglist=old_shoppinglist)
+
+
+
+#single shoppinglist
+@app.route('/update_shoppinglist/<string:id>/',methods=['POST','GET'])
+def update_shoppinglist(id):
+
+    if 'uname' in session and 'list_name' in session:
+        listname=session['list_name']
+
+
+
+    return render_template('update_shoppinglist.html', id=id, listname=listname)
+
+
 
         
         
@@ -170,25 +210,32 @@ def shoppinglistitems():
 
 
 
-
+list_of_uname=[]
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
 
     if request.method == 'POST':
-        uname = request.form.get('username')
-        email = request.form.get('email')
-        pswd = request.form.get('password')
-        pswd_confirmed = request.form.get('password_confirm')
+       uname = request.form.get('username')
+       email = request.form.get('email')
+       pswd = request.form.get('password')
+       pswd_confirmed = request.form.get('password_confirm')
 
-        message = usr_account.registration(uname, email, pswd, pswd_confirmed)
-        if message == "Kudos! Your have successfully registered  your account please proceed to login":
-            return render_template("login.html", response=message)
-        elif message == "Your Account is Already Registered. Proceed to login":
-            return render_template("login.html", response=message)
-        elif message == "That username is already taken. Use another username":
-            return flash(message)
+       message = usr_account.registration(uname, email, pswd, pswd_confirmed)
+       if uname in list_of_uname:
+        flash("That username is already taken, Use another username")
+       elif message == "Kudos! Your have successfully registered  your account please proceed to login":
+        list_of_uname.append(uname)
+        print(list_of_uname)
+        return render_template("login.html", response=message)
+                
 
-        else:
+       elif message == "Your Account is Already Registered. Proceed to login":
+        return render_template("login.html", response=message)
+            
+       elif message == "That username is already taken. Use another username":
+                return flash(message)
+
+       else:
             message = "Your passwords do not match"
             return render_template("signup.html", response=message)
 
