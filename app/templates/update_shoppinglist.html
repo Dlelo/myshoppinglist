@@ -7,15 +7,18 @@
 <br>
 <div>
 
-{{id}}
+{{listname}}
 
 </div>
 <div>
-<form action="" method="POST">
-    <input type="text" class="input-xlarge " value="{{ listname }}" name="new_item"> &nbsp;
+<form action="{{ url_for('update_shoppinglist', id=id) }}" method="POST">
+    <input type="text" class="input-xlarge " value="{{ listname }}" name="list_name"> &nbsp;
     <button type="submit" class="btn btn-sm btn-outline-success" value="add">Update</button>&nbsp;
-    <a href="/delete_shoppinglist/" class="btn btn-danger ">Delete</a>
+    
 </form>
+
+
+
 
 
 </div>
