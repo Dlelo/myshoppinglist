@@ -45,8 +45,10 @@
             {% for x in text %}
             <li> <button class="btn">{{ x }}</button>
                      <a href="/shoppinglistitems" class="btn">Add items</a>
-                    <a href="{{ url_for('update_shoppinglist', listname=x) }}" class="btn btn-default ">Edit</a>
-                    <a href="/delete_shoppinglist" class="btn btn-danger ">Delete</a>
+                    <a href="/update_shoppinglist/{{ loop.index0 }}" class="btn btn-default ">Edit</a>
+                    <a href="/delete_shoppinglist/{{ loop.index0 }}" class="btn btn-danger ">Delete</a>
+
+
             </li>
             {% endfor %}
         </ol> 
