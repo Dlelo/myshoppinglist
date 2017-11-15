@@ -116,24 +116,32 @@ def shoppinglists():
 
     return render_template('shoppinglists.html', text=text)
 
-#Edit shoppinglist
-"""@app.route("/edit_shoppinglist/<int:list_id>", methods=['POST','GET'])
-def edit_article(list_id):
-    #get shoppinglist by id
-    old_shopping_list=session['list_name'][list_id]
+
+
+
+
+#single shoppinglist
+@app.route('/update_shoppinglist/<int:id>/',methods=['POST','GET'])
+def update_shoppinglist(id):
+
+    old_listname=session['list_name']
+    print(old_listname)
+
     if request.method == 'POST':
         if 'uname' in session:
-            #get new shoppinglist name from user input
-            new_shopping_list=request.form.get('new_list_name')
-            if new_shopping_list not in text:
-                message=my_shopping_list.add_shopping_list(shopping_list)
+        
+            new_shoppinglist=request.form.get('list_name')
+
+            if new_shoppinglist not in text:
+                print(new_shoppinglist)
+                text.append(new_shoppinglist)
                 #initiate list name session to enable list items to be stored in list
-                if message=="Shopping list successfully added!":
-                    text.append(new_shopping_list)
-                    list_name[list_id]=new_shopping_list
-                    session['list_name'] = listname
-                    print (text)
-                    print(session['list_name'])
+                session['list_name'] = new_shoppinglist
+
+
+                
+                flash("You have successfully updated your shopping list")  
+                return redirect(url_for('view'))
             else:
                 flash("There is a shopping list with that name. Please choose another shopping list Name") 
                 return redirect(url_for('view'))
@@ -142,33 +150,23 @@ def edit_article(list_id):
             return redirect(url_for('login'))
 
 
-
-    return render_template('update_shoppinglist.html', old_shopping_list=old_shopping_list, list_id=list_id)"""
-
-
-    #single shoppinglist
-@app.route('/edit_shoppinglist/<string:id>/',methods=['POST','GET'])
-def edit_shoppinglist(id):
-
-    #get shoppinglist by id
-    old_shoppinglist_name=session['list_name'][id]
-    if request.method == 'POST':
-        if 'uname' in session and 'list_name' in session:
-            list_name=session['list_name']
-    return render_template('edit_shoppinglist', id=id, old_shoppinglist=old_shoppinglist)
+    return render_template('update_shoppinglist.html', id=id, listname=old_listname)
 
 
-
-#single shoppinglist
-@app.route('/update_shoppinglist/<string:id>/',methods=['POST','GET'])
-def update_shoppinglist(id):
-
+ #delete shoppinglist
+@app.route('/delete_shoppinglist/<int:id>/', methods=['GET','POST'])
+def delete_shoppinglist(id):
+    
+    list_name=session['list_name'] 
     if 'uname' in session and 'list_name' in session:
-        listname=session['list_name']
+        session.pop('list_name')
+        return redirect(url_for('view'))
+
+    return render_template('delete_shoppinglist.html',id=id, list_name=list_name)
 
 
 
-    return render_template('update_shoppinglist.html', id=id, listname=listname)
+
 
 
 
