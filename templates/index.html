@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<div>
+	<h2>Create and keep track of your shopping list here:</h2>
+	<div>
+	{% if session.logged_in==NULL %}
+	<a href="/login"><button class= "btn btn-view">Login In</button> <a>&nbsp; <a href="/signup"><button class= "btn btn-view">Sign Up</button></a>
+	{%endif%}
+	</div>
+</div>
+
+{% endblock %}

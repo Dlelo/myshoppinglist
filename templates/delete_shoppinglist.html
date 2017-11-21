@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Update shopping List{% endblock %}
+{% block body %}
+
+
+<div>
+<br>
+<div>
+
+Are you sure you want to delete?
+
+{{list_name}}
+
+</div>
+
+
+<form action="{{ url_for('update_shoppinglist', id=id) }}" method="POST">
+<button type="submit" class="btn btn-danger" value="Delete">Yes</button>&nbsp;
+</form>
+<a href="/view" class="btn btn-sm btn-outline-success">No</a>
+
+</div>
+
+{% endblock %}

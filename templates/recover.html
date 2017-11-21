@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Recover Password{% endblock %}
+{% block body %}
+
+<div>
+<form class="forms" action="confirm.html">
+
+
+<div class="form-group">
+
+ <label for="recovery-email">Please Enter the Email Address used to register the account </label><br>
+  
+ <input type="text" name="email" placeholder="Email address" required><br>
+
+ </div>
+ <div class="form-group">
+  
+ <button type="submit" class="btn" id="button" placeholder="Submit" >Submit</button>
+
+  </div>
+
+ </form>
+ </div>
+ {% endblock %}
