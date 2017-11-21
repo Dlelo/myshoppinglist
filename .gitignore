@@ -1,6 +1,7 @@
 #Virtual environment
 
-shoppinglistappenvs
+/shoppinglistappenvs
+/envs
 
 *.pyc
 # Byte-compiled / optimized / DLL files
