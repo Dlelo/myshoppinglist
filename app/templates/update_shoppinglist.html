@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Update shopping List{% endblock %}
+{% block body %}
+
+
+<div>
+<br>
+<div>
+
+{{listname}}
+
+</div>
+<div>
+<form action="{{ url_for('update_shoppinglist', id=id) }}" method="POST">
+    <input type="text" class="input-xlarge " value="{{ listname }}" name="list_name"> &nbsp;
+    <button type="submit" class="btn btn-sm btn-outline-success" value="add">Update</button>&nbsp;
+    
+</form>
+
+
+
+
+
+</div>
+
+{% endblock %}
