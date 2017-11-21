@@ -8,6 +8,7 @@ from shopping_list import your_shopping_list
 
 
 app = Flask(__name__)
+app.debug=True
 
 app.secret_key = os.urandom(20)
 USER_ACCOUNT = Accounts_for_users()
@@ -230,4 +231,5 @@ def dropsession():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 500))
+    app.run(host="0.0.0.0", port=port)
