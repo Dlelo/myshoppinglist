@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Add shopping List Items{% endblock %}
+{% block body %}
+
+<div>
+
+<form class="forms"  action = "{{ url_for('shoppinglistitems', id=id) }}" method = "POST">
+    Item <input type = "text" name = "item" /> 
+    Quantity <input type = "text" name = "quantity" />
+    Price <input type = "text" name = "price" />
+    <input type = "submit" value = "Add" class="btn" />
+</form>
+</div>
+
+
+{% if items|length==0 %}
+  
+
+  <p>No item in the shopping list: Please add a shopping list</p>
+
+  {%else%}
+  	<p><h2>Your Shopping Lists items</h2></p>
+  	<div>
+   <table class="table table-striped">
+   	<tr>
+   	<th> Item Name</th>
+   	<th> Item Quantity</th>
+   	<th> Item Price</th>
+   	<th></th>
+   	<th></th>
+   	</tr>
+   	{% for x in items %}
+   	<tr>
+   		<td>{{x.item_name}}</td>
+   		<td>{{x.quantity}}</td>
+   		<td>{{x.price}}</td>
+   		<td><a href="/update_shoppinglist_item/{{ loop.index0 }}" class="btn btn-default ">Edit</a></td>
+   		<td><a href="/delete_shoppinglist_item" class="btn btn-danger ">Delete</a></td>
+   	</tr>
+
+   	 {% endfor %}
+
+   </table>
+    
+           </div>
+
+        <div>
+        	<a href="{{url_for('view')}}">Go back to shopping lists</a>
+        </div>
+
+  </div>
+
+
+{% endif %}
+{% endblock %}
+
