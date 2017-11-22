@@ -8,7 +8,7 @@ from shopping_list import your_shopping_list
 
 
 app = Flask(__name__)
-app.debug=True
+app.debug = True
 
 app.secret_key = os.urandom(20)
 USER_ACCOUNT = Accounts_for_users()
@@ -155,6 +155,7 @@ def update_shoppinglist(id):
             new_shoppinglist = request.form.get('list_name')
             if new_shoppinglist not in TEXT:
                 print(new_shoppinglist)
+                TEXT.remove(old_listname)
                 TEXT.append(new_shoppinglist)
                 #initiate list name session to enable list items to be stored in list
                 session['list_name'] = new_shoppinglist
@@ -174,12 +175,22 @@ def update_shoppinglist(id):
 @app.route('/delete_shoppinglist/<int:id>/', methods=['GET', 'POST'])
 def delete_shoppinglist(id):
     """Function that deletes shopping list"""
-    list_name = session['list_name']
-    if 'uname' in session and 'list_name' in session:
-        session.pop('list_name')
-        return redirect(url_for('view'))
+    todelete_listname = session['list_name']
+    print (todelete_listname)
 
-    return render_template('delete_shoppinglist.html', id=id, list_name=list_name)
+    if request.method == 'POST':
+        if 'uname' in session:
+            if todelete_listname in TEXT:
+                TEXT.remove(todelete_listname)
+                flash("You have successfully deleted the shopping list")
+                return redirect(url_for('view'))
+            else:
+                flash("Unable to delete shoppinglist")
+                return redirect(url_for('view'))
+        else:
+            flash("Login to proceed")
+            return redirect(url_for('login'))
+    return render_template('delete_shoppinglist.html', id=id, listname=todelete_listname)
 #add list_item to shopping list
 
 
@@ -210,7 +221,7 @@ def shoppinglistitems(id):
         else:
             return "Login to proceed"
 
-    return render_template('shoppinglistitems.html', items=LISTITEM, id=id)
+    return render_template('shoppinglistitems.html', id=id, LISTITEM=LISTITEM)
 
 @app.route('/getsession')
 def getsession():

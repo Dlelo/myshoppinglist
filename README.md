@@ -22,7 +22,6 @@ ENJOY!
 
 
 
-
 myshopping list app on heroku: https://manageyourshopping.herokuapp.com
 
 1.Register your account.
