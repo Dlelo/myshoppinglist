@@ -101,7 +101,7 @@ def view():
             if the_shopping_list not in TEXT:
                 message = MY_SHOPPING_LIST.add_shopping_list(the_shopping_list)
                 #initiate list name session to enable list items to be stored in list
-                if message == "Shopping list successfully added!":
+                if message == "Shopping list successfully added successfully!":
                     TEXT.append(the_shopping_list)
                     session['list_name'] = the_shopping_list
                     print (TEXT)
