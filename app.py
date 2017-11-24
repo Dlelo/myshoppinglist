@@ -216,7 +216,7 @@ def shoppinglistitems(id):
                 LISTITEM.append(dict_of_list_items)
                 print(LISTITEM)
                 message = MY_SHOPPING_LIST.add_shopping_list_item(itemname, itemquantity, itemprice)
-                if message == "shopping list item successfully added":
+                if message == "shopping list item successfully added !":
                     print(LISTITEM)
         else:
             return "Login to proceed"
