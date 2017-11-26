@@ -1,6 +1,15 @@
 language: python
 python:
-    - 2.7.12
+  - "2.7.12"
+  - "3.5.2"
+  - "3.6"
 script:
-    - tests.py
+  - tests.py
+
+install:
+    - "pip install ."
+    - "pip install coveralls"
+after_script:
+    - coveralls
+
 
