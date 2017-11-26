@@ -4,7 +4,8 @@
 
 <div>
 
-<form class="forms"  action = "/shoppinglistitems" method = "POST">
+
+<form class="forms"  action = "{{ url_for('shoppinglistitems', id=id) }}" method = "POST">
     Item <input type = "text" name = "item" /> 
     Quantity <input type = "text" name = "quantity" />
     Price <input type = "text" name = "price" />
