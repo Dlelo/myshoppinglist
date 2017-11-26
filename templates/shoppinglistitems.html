@@ -4,7 +4,7 @@
 
 <div>
 
-<form class="forms"  action = "{{ url_for('shoppinglistitems', id=id) }}" method = "POST">
+<form class="forms"  action = "/shoppinglistitems" method = "POST">
     Item <input type = "text" name = "item" /> 
     Quantity <input type = "text" name = "quantity" />
     Price <input type = "text" name = "price" />
@@ -13,10 +13,10 @@
 </div>
 
 
-{% if LISTITEM|length==0 %}
+{% if items|length==0 %}
   
 
-  <p>No item in the shopping list: Please add items to shopping list</p>
+  <p>No item in the shopping list: Please add a shopping list</p>
 
   {%else%}
   	<p><h2>Your Shopping Lists items</h2></p>
@@ -29,7 +29,7 @@
    	<th></th>
    	<th></th>
    	</tr>
-   	{% for x in LISTITEM %}
+   	{% for x in items %}
    	<tr>
    		<td>{{x.item_name}}</td>
    		<td>{{x.quantity}}</td>

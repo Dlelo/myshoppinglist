@@ -87,7 +87,6 @@ def logout():
     session.pop('uname', None)
     # remove the username from the session if it is there
     return redirect(url_for('index'))
-
 TEXT = []
 
 """user dashboard page and adds shopping lists and displays them"""
@@ -101,7 +100,7 @@ def view():
             if the_shopping_list not in TEXT:
                 message = MY_SHOPPING_LIST.add_shopping_list(the_shopping_list)
                 #initiate list name session to enable list items to be stored in list
-                if message == "Shopping list successfully added successfully!":
+                if message == "Shopping list successfully added!":
                     TEXT.append(the_shopping_list)
                     session['list_name'] = the_shopping_list
                     print (TEXT)
@@ -115,6 +114,8 @@ def view():
 
 
     return render_template('view.html', TEXT=TEXT)
+
+
 
 #shopping lists
 @app.route('/shoppinglists', methods=['POST', 'GET'])
@@ -196,9 +197,9 @@ def delete_shoppinglist(id):
 
 LISTITEM = []
 
-@app.route('/shoppinglistitems/<int:id>/', methods=['POST', 'GET'])
+@app.route('/shoppinglistitems', methods=['POST', 'GET'])
 
-def shoppinglistitems(id):
+def shoppinglistitems():
     """function that adds shopping list items"""
     if request.method == 'POST':
         if 'uname' in session and 'list_name' in session:
@@ -209,19 +210,19 @@ def shoppinglistitems(id):
                 itemprice = request.form.get('price')
 
                 #adding items to dictionary
-                dict_of_list_items['item_name'] = itemname
+                dict_of_list_items['item'] = itemname
                 dict_of_list_items['quantity'] = itemquantity
                 dict_of_list_items['price'] = itemprice
 
                 LISTITEM.append(dict_of_list_items)
                 print(LISTITEM)
                 message = MY_SHOPPING_LIST.add_shopping_list_item(itemname, itemquantity, itemprice)
-                if message == "shopping list item successfully added !":
+                if message == "shopping list item successfully added":
                     print(LISTITEM)
         else:
             return "Login to proceed"
 
-    return render_template('shoppinglistitems.html', id=id, LISTITEM=LISTITEM)
+    return render_template('shoppinglistitems.html', items=LISTITEM)
 
 @app.route('/getsession')
 def getsession():
