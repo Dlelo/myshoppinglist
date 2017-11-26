@@ -4,7 +4,7 @@ Create your shopping list here
 
 This web appliation allows you to manage your shopping as it allows you to keep track of your shopping lists and items that you want to shop. You can  create, update, delete your shopping list and items in your shopping list.
 
-[![Build Status](https://travis-ci.org/Dlelo/myshoppinglist.svg?branch=develop)](https://travis-ci.org/Dlelo/myshoppinglist)
+[![Build Status](https://travis-ci.org/Dlelo/myshoppinglist.svg?branch=develop)](https://travis-ci.org/Dlelo/myshoppinglist)   [![Coverage Status](https://coveralls.io/repos/github/Dlelo/myshoppinglist/badge.svg?branch=master)](https://coveralls.io/github/Dlelo/myshoppinglist?branch=master)
 
 How to use:
 
