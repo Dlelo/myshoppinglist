@@ -4,6 +4,8 @@ Create your shopping list here
 
 This web appliation allows you to manage your shopping as it allows you to keep track of your shopping lists and items that you want to shop. You can  create, update, delete your shopping list and items in your shopping list.
 
+[![Build Status](https://travis-ci.org/Dlelo/myshoppinglist.svg?branch=develop)](https://travis-ci.org/Dlelo/myshoppinglist)   [![Coverage Status](https://coveralls.io/repos/github/Dlelo/myshoppinglist/badge.svg?branch=master)](https://coveralls.io/github/Dlelo/myshoppinglist?branch=master)
+
 How to use:
 
 1.Create a folder in your local PC
@@ -18,7 +20,7 @@ How to use:
   $ flask run
 7.It will give you a URL where the app is running (Running on http://127.0.0.1:5000/) Go to your browser to view the app.
 
-ENJOY!
+Have fun with it!
 
 
 
