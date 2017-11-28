@@ -195,34 +195,37 @@ def delete_shoppinglist(id):
 #add list_item to shopping list
 
 
-LISTITEM = []
+LISTITEMS = []
 
-@app.route('/shoppinglistitems', methods=['POST', 'GET'])
-
+@app.route('/shoppinglistitems', methods = ['POST','GET'])
 def shoppinglistitems():
-    """function that adds shopping list items"""
     if request.method == 'POST':
         if 'uname' in session and 'list_name' in session:
-            if session['list_name'] == 'list_name':
-                dict_of_list_items = {}
-                itemname = request.form.get('item')
-                itemquantity = request.form.get('quantity')
-                itemprice = request.form.get('price')
+            dict_of_list_items = {}
+            
 
-                #adding items to dictionary
-                dict_of_list_items['item'] = itemname
-                dict_of_list_items['quantity'] = itemquantity
-                dict_of_list_items['price'] = itemprice
+            itemname = request.form.get('item')
+            itemquantity = request.form.get('quantity')
+            itemprice = request.form.get('price')
 
-                LISTITEM.append(dict_of_list_items)
-                print(LISTITEM)
-                message = MY_SHOPPING_LIST.add_shopping_list_item(itemname, itemquantity, itemprice)
-                if message == "shopping list item successfully added":
-                    print(LISTITEM)
+            #adding items to dictionary
+            dict_of_list_items['item_name'] = itemname
+            dict_of_list_items['quantity'] = itemquantity
+            dict_of_list_items['price'] = itemprice
+
+            LISTITEMS.append(dict_of_list_items)
+            print(LISTITEMS)
+
+
+            message = MY_SHOPPING_LIST.add_shopping_list_item(itemname, itemquantity, itemprice)
+            if message == "shopping list item successfully added":
+
+                print (LISTITEMS)
         else:
             return "Login to proceed"
 
-    return render_template('shoppinglistitems.html', items=LISTITEM)
+
+    return render_template('shoppinglistitems.html', items=LISTITEMS)
 
 @app.route('/getsession')
 def getsession():
