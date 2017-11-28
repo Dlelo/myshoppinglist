@@ -4,7 +4,7 @@
 
 <div>
 
-<form action = "/shoppinglistitems" method = "POST">
+<form action = "{{ url_for('shoppinglistitems', id=id) }}" method = "POST">
     Item <input type = "text" name = "item" /> 
     Quantity <input type = "text" name = "quantity" />
     Price <input type = "text" name = "price" />
@@ -34,8 +34,8 @@
    		<td>{{x.item_name}}</td>
    		<td>{{x.quantity}}</td>
    		<td>{{x.price}}</td>
-   		<td><a href="/update_shoppinglist_item/{{ loop.index0 }}" class="btn btn-default ">Edit</a></td>
-   		<td><a href="/delete_shoppinglist_item" class="btn btn-danger ">Delete</a></td>
+   		<td><a href="/update_shoppinglistitems/{{ loop.index0 }}" class="btn btn-default ">Edit</a></td>
+   		<td><a href="/delete_shoppinglistitems/{{ loop.index0 }}" class="btn btn-danger ">Delete</a></td>
    	</tr>
 
    	 {% endfor %}
