@@ -4,8 +4,7 @@
 
 <div>
 
-
-<form class="forms"  action = "{{ url_for('shoppinglistitems', id=id) }}" method = "POST">
+<form action = "/shoppinglistitems" method = "POST">
     Item <input type = "text" name = "item" /> 
     Quantity <input type = "text" name = "quantity" />
     Price <input type = "text" name = "price" />
@@ -46,7 +45,7 @@
            </div>
 
         <div>
-        	<a href="{{url_for('view')}}">Go back to shopping lists</a>
+        	<a href="/view">Go back to shopping lists</a>
         </div>
 
   </div>
