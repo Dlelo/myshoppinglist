@@ -7,18 +7,17 @@
 <br>
 <div>
 
-Are you sure you want to delete?
 
-{{list_name}}
+<p>Are you sure you want to delete the shopping list: </p>
+
+{{listname}}
 
 </div>
-
-
-<form action="{{ url_for('update_shoppinglist', id=id) }}" method="POST">
-<button type="submit" class="btn btn-danger" value="Delete">Yes</button>&nbsp;
+<div>
+<form action="{{ url_for('delete_shoppinglist', id=id) }}" method="POST">
+ <button type="submit" class="btn btn-sm btn-outline-success" value="add">Delete</button>&nbsp;    
 </form>
-<a href="/view" class="btn btn-sm btn-outline-success">No</a>
-
-</div>
+  <a href="/view" class="btn btn-sm btn-outline-success">No</a>
+<div>
 
 {% endblock %}

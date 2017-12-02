@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Update shopping List{% endblock %}
+{% block body %}
+
+
+<div>
+<br>
+<div>
+
+You are updating the item: {{itemname}}
+
+<div>
+    
+    <form action = "{{ url_for('update_shoppinglistitems', id=id) }}" method = "POST">
+        Item <input type = "text" value = "{{ itemname }}" name = "item" /> 
+        Quantity <input type = "text" value= "{{ itemquantity}}" name = "quantity" />
+        Price <input type = "text" value= "{{ itemprice }}" name = "price" />
+        <input type = "submit" value = "Update" class="btn" />
+    </form>
+    </div>
+    
+            <div>
+                <a href="/view">Go back to shopping lists </a>
+            </div>
+    
+      </div>
+      </div>
+
+
+{% endblock %}

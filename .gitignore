@@ -1,0 +1,13 @@
+#Virtual environment
+
+/shoppinglistappenvs
+/envs
+
+*.pyc
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
