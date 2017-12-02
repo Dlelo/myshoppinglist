@@ -197,8 +197,9 @@ def delete_shoppinglist(id):
 
 LISTITEMS = []
 
-@app.route('/shoppinglistitems/<int:id>/', methods = ['POST','GET'])
+@app.route('/shoppinglistitems/<int:id>/', methods=['POST','GET'])
 def shoppinglistitems(id):
+    """Method that adds list items"""
     if request.method == 'POST':
         if 'uname' in session and 'list_name' in session:
             dict_of_list_items = {}
@@ -259,8 +260,6 @@ def update_shoppinglistitems(id):
                 dict_of_list_items['item_name'] = new_itemname
                 dict_of_list_items['quantity'] = new_quantity
                 dict_of_list_items['price'] = new_price
-                
-                
                 session['item_name'] = new_itemname
                 session['quantity'] = new_quantity
                 session['price'] = new_price
@@ -315,7 +314,7 @@ def delete_shoppinglistitems(id):
             return redirect(url_for('login'))
 
 
-    return render_template('delete_shoppinglistitems.html', id=id, itemname=old_itemname, itemquantity=old_quantity,itemprice=old_price )
+    return render_template('delete_shoppinglistitems.html', id=id, itemname=old_itemname, itemquantity=old_quantity, itemprice=old_price)
 
 @app.route('/getsession')
 def getsession():
